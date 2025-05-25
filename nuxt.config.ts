@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-    css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css'],
 
   modules: [
     '@nuxt/content',
@@ -11,5 +11,14 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/ui'
-  ]
+  ],
+
+
+  components: {
+    // Ensure global component registration
+    global: true,
+    dirs: [
+      '~/components'
+    ]
+  }
 })

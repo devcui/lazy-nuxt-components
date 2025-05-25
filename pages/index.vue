@@ -1,10 +1,25 @@
 <template>
-    <EditorTable v-bind="props" />
+  <div class="flex flex-col lg:flex-row h-screen max-w-full mx-auto p-5 gap-0">
+    <!-- Left Panel -->
+    <div class="flex-1 lg:pr-4 overflow-auto">
+      <EditorTable v-bind="props" />
+    </div>
+    
+    <!-- Divider -->
+    <div class="h-px lg:h-auto lg:w-px bg-gray-300 my-4 lg:my-0 lg:mx-4 lg:min-h-full"></div>
+    
+    <!-- Right Panel -->
+    <div class="flex-1 lg:pl-4 overflow-auto">
+      <ContentRenderer v-if="home" :value="home" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as z from 'zod'
 import type { ETProps } from '~/components/editor-table/types'
+
+const { data: home } = await useAsyncData(() => queryCollection('content').path('/editor-table').first())
 
 type User = {
   id: string
